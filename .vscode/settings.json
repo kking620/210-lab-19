@@ -4,6 +4,7 @@
         "string": "cpp",
         "istream": "cpp",
         "xstring": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "vector": "cpp"
     }
 }

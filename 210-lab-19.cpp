@@ -14,7 +14,7 @@ class Movie
         struct reviewNode
         {
             double rating;
-            string comments;
+            vector<string> comments;
             reviewNode *next;
         };
         
@@ -32,7 +32,7 @@ class Movie
             return r;
         }
 
-        void addReview(double rating, vector comment) 
+        void addReview(double rating, vector<string> comment) 
         {
             reviewNode* newReview = new reviewNode;
             if (!head)
@@ -58,7 +58,8 @@ class Movie
             while (current != nullptr) 
             {
                 cout  << setw(13) << "Rating: " << current->rating << endl;
-                cout  << setw(22) << "Review Comment: \"" << current->comments << "\"" << endl;
+                for(int i = 0; i < current->comments.size(); i++)
+                cout  << setw(22) << "Review Comment: \"" << current->comments[i] << "\"" << endl;
                 current = current->next;
             }
             cout << endl;
@@ -108,6 +109,8 @@ int main()
             rS = temp.randomRating();
             temp.addReview(rS, reviews);
             movies_c.push_back(temp);
+
+            reviews.clear();
         }
 
         fin.close();
