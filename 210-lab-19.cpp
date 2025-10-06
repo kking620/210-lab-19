@@ -49,7 +49,7 @@ class Movie
                 head = newReview;
             }
         }
-        void displayReviews(string title, double rating, string comment)
+        void displayReviews()
         {
             cout << "Movie: " << title << endl;
             reviewNode* current = head;
@@ -88,14 +88,24 @@ int main()
     {
         while(getline(fin, title))
         {
+            getline(fin, rN);
+            fin.ignore();
+
             Movie temp;
 
+            temp.setMovieTitle(title);
             rS = temp.randomRating();
+            temp.addReview(rS, rN);
+            movies_c.push_back(temp);
         }
-        
-    }
 
-    
+        fin.close();
+    }
+    else
+        cout << "Input file not found.\n";
+
+    for (auto val : movies_c)
+        val.displayReviews();
 
     return 0;
 }
