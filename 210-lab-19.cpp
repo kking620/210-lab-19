@@ -9,64 +9,56 @@ using namespace std;
 class Movie
 {
     private:
-    string movieTitle;
-    Node movieInfo;
+        string movieTitle;
+        struct Node 
+        {
+            float value;
+            string comments;
+            Node *next;
+        };
+
+        Node *head = nullptr;
+
+    public:
+        void addToHead(float val, string com, Node *&hd);
+        void output(float val, int c, Node * hd);
+        void deleteList(Node *hd);
 };
 
-struct Node {
-    float value;
-    string comments;
-    Node *next;
-};
 
-void addToHead(float val, string com, Node *&hd);
-void output(float val, int c, Node * hd);
-void deleteList(Node *hd);
+
+
 
 int main()
 {
-    Node *head = nullptr;
+    Movie movie;
+    vector <Movie> movies_r;
+    
     int count = 0;
-    float reviewScore;
+    string title;
+    float tempReviews;
+    string tempNotes;
     float totalScore;
-    string reviewNotes;
-    char response;
 
-    cout << "Enter a review? Y/N ";
-    cin >> response;
-    cin.ignore();
-
-    if (response == 'y' || response == 'Y') 
-    {
+    ifstream fin ("input.txt");
         //asks the user whether they would like to insert the previously obtained random value at the head or the tail end of the linked list
-        while (true)
+    if (fin.good())
+    {
+        while(getline(fin, title))
         {
-            if(response == 'Y' || response == 'y')
-            {
-                count++;
-                
-                cout << "Enter review rating 0-5: ";
-                cin >> reviewScore;
-                cin.ignore();
+            count++;
+            fin >> tempReviews;
+            fin.ignore();
 
-                totalScore += reviewScore;
+            totalScore += tempReviews;
 
-                cout << "Enter review comments: ";
-                getline(cin, reviewNotes);
+            getline(fin, tempNotes);
 
-                //determines, which function will be called to either add the value found to the front or back of the linked list respectively
-                addToHead(reviewScore, reviewNotes, head);
-            }
-                
-            cout << "Enter another review? Y/N: ";
-            cin >> response;
-            cin.ignore();
-
-            if (response == 'n' || response == 'N') break;
-            else if(response != 'Y' && response != 'y' && response != 'n' && response != 'N')
-                cout << "Invalid response. Please try again.\n"; 
+            //determines, which function will be called to either add the value found to the front or back of the linked list respectively
+            movies_r.addToHead(tempReviews, tempNotes, head);
         }
     }
+}
 
     output(totalScore, count, head);
     deleteList(head);
