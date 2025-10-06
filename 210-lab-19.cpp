@@ -24,10 +24,10 @@ class Movie
     public:
         void setMovieTitle(string t) {title = t;}
         double randomRating()
-        {
+        {   
             cout.setf(ios::fixed|ios::showpoint);
             cout << setprecision(1);
-            double r = 1.0 + (static_cast<double>(rand()%5));
+            double r = 1.0 + (static_cast<double>(rand()) / RAND_MAX) * 4.0;
 
             return r;
         }
