@@ -32,7 +32,7 @@ class Movie
             return r;
         }
 
-        void addReview(double rating, string comment) 
+        void addReview(double rating, vector comment) 
         {
             reviewNode* newReview = new reviewNode;
             if (!head)
@@ -40,13 +40,13 @@ class Movie
                 head = newReview;
                 newReview->next = nullptr;
                 newReview->rating = rating;
-                newReview ->comments = comment;
+                newReview->comments = comment;
             }
             else 
             {
                 newReview->next = nullptr;
                 newReview->rating = rating;
-                newReview ->comments = comment;
+                newReview->comments = comment;
                 head = newReview;
             }
         }
@@ -58,7 +58,7 @@ class Movie
             while (current != nullptr) 
             {
                 cout  << setw(13) << "Rating: " << current->rating << endl;
-                cout  << setw(23) << "Review Comment: \"" << current->comments << "\"" << endl;
+                cout  << setw(22) << "Review Comment: \"" << current->comments << "\"" << endl;
                 current = current->next;
             }
             cout << endl;
@@ -81,6 +81,7 @@ int main()
     srand(time(0));
     
     vector <Movie> movies_c;
+    vector <string> reviews;
     
     ifstream fin ("input.txt");
     
@@ -92,14 +93,20 @@ int main()
     {
         while(getline(fin, title))
         {
-            getline(fin, rN);
-            fin.ignore();
+            while(getline(fin, rN))
+            {
+                if(rN.empty()) break;
+                else
+                {
+                    reviews.push_back(rN);
+                }
+            }
 
             Movie temp;
 
             temp.setMovieTitle(title);
             rS = temp.randomRating();
-            temp.addReview(rS, rN);
+            temp.addReview(rS, reviews);
             movies_c.push_back(temp);
         }
 
