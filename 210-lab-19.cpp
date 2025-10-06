@@ -25,7 +25,8 @@ class Movie
         void setMovieTitle(string t) {title = t;}
         double randomRating()
         {
-            srand(time(0));
+            cout.setf(ios::fixed|ios::showpoint);
+            cout << setprecision(1);
             double r = 1.0 + (static_cast<double>(rand()%5));
 
             return r;
@@ -51,15 +52,16 @@ class Movie
         }
         void displayReviews()
         {
-            cout << "Movie: " << title << endl;
+            cout << "Movie Title: " << title << endl;
             reviewNode* current = head;
 
             while (current != nullptr) 
             {
-                cout << "  Rating: " << current->rating << ", Review Comments: \"" << current->comments << "\"" << endl;
+                cout  << setw(13) << "Rating: " << current->rating << endl;
+                cout  << setw(23) << "Review Comment: \"" << current->comments << "\"" << endl;
                 current = current->next;
             }
-            cout << std::endl;
+            cout << endl;
         }
         void deleteList()
         {
@@ -76,6 +78,8 @@ class Movie
 
 int main()
 {
+    srand(time(0));
+    
     vector <Movie> movies_c;
     
     ifstream fin ("input.txt");
