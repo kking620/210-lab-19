@@ -84,6 +84,21 @@ class Movie
                 current = current->next;
             }
             cout << endl;
+
+            deleteList();
+        }
+
+        //function that traverses the linked list and deletes each node individually until the entirety of the linked list is deleted
+        void deleteList()
+        {
+            // deleting the linked list
+            reviewNode *current = head;
+            while (current) {
+                head = current->next;
+                delete current;
+                current = head;
+            }
+            head = nullptr;
         }
 };
 
