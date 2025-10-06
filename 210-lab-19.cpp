@@ -7,6 +7,60 @@
 
 using namespace std;
 
+class Movie
+{
+    private:
+        struct reviewNode
+        {
+            double rating;
+            string comments;
+            reviewNode *next;
+        };
+        
+        string title;
+        reviewNode * head = nullptr;
+
+    public:
+        double randomRating()
+        {
+            srand(time(0));
+            double rating = 1.0 + (static_cast<double>(rand()%5));
+
+            return rating;
+        }
+
+        void addReview(double rating, string comment) 
+        {
+            reviewNode* newReview = new reviewNode;
+            if (!head)
+            {
+                head = newReview;
+                newReview->next = nullptr;
+                newReview->rating = rating;
+                newReview ->comments = comment;
+            }
+            else 
+            {
+                newReview->next = nullptr;
+                newReview->rating = rating;
+                newReview ->comments = comment;
+                head = newReview;
+            }
+        }
+        void displayReviews(string title, double rating, string comment)
+        {
+            cout << "Movie: " << title << endl;
+            reviewNode* current = head;
+
+            while (current != nullptr) 
+            {
+                cout << "  Rating: " << current->rating << ", Review Comments: \"" << current->comments << "\"" << endl;
+                current = current->next;
+            }
+            cout << std::endl;
+        }
+};
+
 struct Node {
     float value;
     string comments;
